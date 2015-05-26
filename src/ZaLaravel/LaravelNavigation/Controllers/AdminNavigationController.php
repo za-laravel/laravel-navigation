@@ -34,7 +34,7 @@ class AdminNavigationController extends AbstractAdminController {
 	public function create(Navigation $nav)
 	{
         $all_navs = Navigation::all();
-        $navs = [0 => '-- Родитель'];
+        $navs = [0 => '-- Parent'];
         foreach($all_navs as $n) {
             $navs[$n->id] = $n->name;
         }
@@ -93,7 +93,7 @@ class AdminNavigationController extends AbstractAdminController {
 	{
         $all_navs = Navigation::where('id', '!=', $nav->id)->get();
 
-        $navs = [0 => '-- Родитель'];
+        $navs = [0 => '-- Parent'];
         foreach($all_navs as $n) {
             $navs[$n->id] = $n->name;
         }

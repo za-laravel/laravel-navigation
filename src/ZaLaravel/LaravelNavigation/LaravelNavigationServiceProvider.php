@@ -6,10 +6,10 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Config;
 
 /**
- * Class LaravelMenuServiceProvider
+ * Class LaravelNavigationServiceProvider
  * @package ZaLaravel\LaravelNavigation
  */
-class LaravelMenuServiceProvider extends ServiceProvider {
+class LaravelNavigationServiceProvider extends ServiceProvider {
 
     /**
      * @return void
