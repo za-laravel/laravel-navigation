@@ -5,22 +5,29 @@ namespace ZaLaravel\LaravelNavigation\Events;
 use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 
-class NavigationWasDeleted extends Event {
+/**
+ * Class NavigationWasDeleted
+ * @package ZaLaravel\LaravelNavigation\Events
+ */
+class NavigationWasDeleted extends Event
+{
 
-	use SerializesModels;
+    use SerializesModels;
 
     protected $nav;
-	/**
-	 * Create a new event instance.
-	 *
-	 * @return void
-	 */
-	public function __construct($nav)
-	{
-		$this->nav = $nav;
-	}
 
-    public function getNavigation(){
+    /**
+     * Create a new event instance.
+     *
+     * @return void
+     */
+    public function __construct($nav)
+    {
+        $this->nav = $nav;
+    }
+
+    public function getNavigation()
+    {
         return $this->nav;
     }
 
