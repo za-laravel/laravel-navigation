@@ -1,4 +1,4 @@
-@extends('admin.adminLayout')
+@extends('laravel-admin::layout')
 
 @section('title')
     Создать пункт меню
@@ -26,12 +26,12 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            @include('partials.errors.basic')
+                            @include('errorBasic')
 
                             {!! Form::model($nav,['route'=>['admin.navigation.store'],
                                 'method' => 'POST',
                                 'class'=>'form-horizontal', 'role'=>'form']) !!}
-                                @include('admin.navigation._form')
+                                @include('_form')
                             {!! Form::close() !!}
                         </div>
                         <!-- /.col-lg-6 (nested) -->
