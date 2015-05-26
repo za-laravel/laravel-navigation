@@ -15,7 +15,7 @@
   },
   "autoload": {
     "psr-4": {
-      "ZaLaravel\\LaravelAdmin\\": "src/ZaLaravel/LaravelNavigation"
+      "ZaLaravel\\LaravelNavigation\\": "src/ZaLaravel/LaravelNavigation"
     }
   },
   "minimum-stability": "dev"
