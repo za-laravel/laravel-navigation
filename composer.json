@@ -13,9 +13,10 @@
     "illuminate/support": "5.0.*",
     "za-laravel/laravel-admin": "dev-master"
   },
+
   "autoload": {
     "psr-4": {
-      "ZaLaravel\\LaravelAdmin\\": "src/ZaLaravel/LaravelNavigation"
+      "ZaLaravel\\LaravelТфмшпфешщт\\": "src/ZaLaravel/LaravelNavigation"
     }
   },
   "minimum-stability": "dev"
