@@ -34,7 +34,7 @@ class LaravelNavigationServiceProvider extends ServiceProvider {
         ], 'seeds');
 
         // Routes
-        include '/../../routes.php';
+        include __DIR__.'/../../routes.php';
     }
 
     /**
