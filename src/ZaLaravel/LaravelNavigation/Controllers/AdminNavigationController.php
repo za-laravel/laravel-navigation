@@ -85,9 +85,8 @@ class AdminNavigationController extends AbstractAdminController
      */
     public function edit(NavigationInterface $nav)
     {
-        $all_navs = $nav::findOrfail('id')->get();
-
-        $navs = [0 => '-- Parent'];
+        $all_navs = $nav::where('id', '==', $nav->id)->get();
+        $navs = [0 => 'Choose parent'];
         foreach ($all_navs as $n)
         {
             $navs[$n->id] = $n->name;
@@ -106,10 +105,6 @@ class AdminNavigationController extends AbstractAdminController
     public function update(NavigationInterface $nav, NavigationRequest $request)
     {
         $data = $request->all();
-        $data = [
-            'name' => $data['name']
-        ];
-        unset($data['name']);
 
         $nav->fill($data);
 
@@ -122,11 +117,7 @@ class AdminNavigationController extends AbstractAdminController
 
         $nav->save();
 
-        \Session::flash('message', 'Пункт меню успешно обновлен');
-
-        \Event::fire(new NavigationWasEdited($nav));
-
-        return redirect()->route('laravel-navigation::edit', ['id' => $nav->id]);
+        return redirect()->route('admin.navigation.index', ['id' => $nav->id]);
     }
 
     /**
