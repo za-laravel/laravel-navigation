@@ -16,11 +16,18 @@ class LaravelNavigationServiceProvider extends ServiceProvider {
      */
     public function boot()
     {
+        // Views
         $this->loadViewsFrom(__DIR__ . '/../../views', 'laravel-navigation');
 
+        // Migrations
         $this->publishes([
             __DIR__.'/../../database/migrations/' => base_path('/database/migrations')
         ], 'migrations');
+
+        // Seeds
+        $this->publishes([
+            __DIR__.'/../../database/seeds/' => base_path('/database/seeds')
+        ], 'seeds');
     }
 
     /**
