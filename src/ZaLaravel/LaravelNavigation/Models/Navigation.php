@@ -15,7 +15,7 @@ class Navigation extends Model
 
     public function parent()
     {
-        return $this->belongsTo('App\Models\Navigation', 'parent_id');
+        return $this->belongsTo('ZaLaravel\LaravelNavigation\Models\Navigation', 'parent_id');
     }
 
 }
