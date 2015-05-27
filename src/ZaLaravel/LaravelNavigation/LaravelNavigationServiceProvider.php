@@ -33,7 +33,8 @@ class LaravelNavigationServiceProvider extends ServiceProvider {
             __DIR__.'/../../database/seeds/' => base_path('/database/seeds')
         ], 'seeds');
 
-        // Routs
+        // Routes
+        include '/../../routes.php';
     }
 
     /**
