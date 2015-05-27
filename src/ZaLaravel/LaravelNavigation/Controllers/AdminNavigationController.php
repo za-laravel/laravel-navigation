@@ -36,7 +36,7 @@ class AdminNavigationController extends AbstractAdminController
     public function create(NavigationInterface $nav)
     {
         $getNav = $nav::all();
-        $navs = [0 => 'Choice parent'];
+        $navs = [0 => '-- Choose parent'];
         foreach ($getNav as $n)
         {
             $navs[$n->id] = $n->name;
@@ -56,10 +56,13 @@ class AdminNavigationController extends AbstractAdminController
     {
         $input = $request->all();
 
+        $nav->fill($input);
         if ($input['parent_id']) {
             $parent = $nav::find($input['parent_id']);
             $nav->parent()->associate($parent);
         }
+        $nav->save();
+        
         return redirect()->route('admin.navigation.index');
     }
 
