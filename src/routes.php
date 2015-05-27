@@ -11,4 +11,5 @@
 |
 */
 
+Route::model('user', 'ZaLaravel\LaravelNavigation\Models\Navigation');
 Route::resource('/admin/navigation', 'ZaLaravel\LaravelNavigation\Controllers\AdminNavigationController');
