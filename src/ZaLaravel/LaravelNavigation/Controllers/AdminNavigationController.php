@@ -2,9 +2,9 @@
 
 namespace ZaLaravel\LaravelNavigation\Controllers;
 
-use App\Events\NavigationWasCreated;
-use App\Events\NavigationWasDeleted;
-use App\Events\NavigationWasEdited;
+use ZaLaravel\LaravelNavigation\Events\NavigationWasCreated;
+use ZaLaravel\LaravelNavigation\Events\NavigationWasDeleted;
+use ZaLaravel\LaravelNavigation\Events\NavigationWasEdited;
 use ZaLaravel\LaravelAdmin\Controllers\AbstractAdminController;
 use ZaLaravel\LaravelNavigation\Models\Interfaces\NavigationInterface;
 use ZaLaravel\LaravelNavigation\Requests\NavigationRequest;
@@ -35,15 +35,13 @@ class AdminNavigationController extends AbstractAdminController
      */
     public function create(NavigationInterface $nav)
     {
-        $all_navs = $nav::all();
-        $navs = [0 => '-- Parent'];
-
-        foreach ($all_navs as $n)
+        $getNav = $nav::all();
+        $navs = [0 => 'Choice parent'];
+        foreach ($getNav as $n)
         {
             $navs[$n->id] = $n->name;
         }
-        return view('laravel-navigation::create',
-            ['action' => 'create', 'nav' => $nav, 'navs' => $navs]);
+        return view('laravel-navigation::create', ['action' => 'create', 'navs' => $navs]);
     }
 
     /**
@@ -56,26 +54,13 @@ class AdminNavigationController extends AbstractAdminController
 
     public function store(NavigationInterface $nav, NavigationRequest $request)
     {
-        $data = $request->all();
-        $data = [
-            'name' => $data['name']
-        ];
-        unset($data['name']);
+        $input = $request->all();
 
-        $nav->fill($data);
-
-        if ($data['parent_id']) {
-            $parent = $nav::find($data['parent_id']);
+        if ($input['parent_id']) {
+            $parent = $nav::find($input['parent_id']);
             $nav->parent()->associate($parent);
         }
-
-        $nav->save();
-
-        \Session::flash('message', 'Пункт меню успешно создан');
-
-        \Event::fire(new NavigationWasCreated($nav));
-
-        return redirect()->route('laravel-navigation::edit', ['id' => $nav->id]);
+        return redirect()->route('admin.navigation.index');
     }
 
     /**
@@ -97,7 +82,7 @@ class AdminNavigationController extends AbstractAdminController
      */
     public function edit(NavigationInterface $nav)
     {
-        $all_navs = $nav::where('id', '!=', $nav->id)->get();
+        $all_navs = $nav::findOrfail('id')->get();
 
         $navs = [0 => '-- Parent'];
         foreach ($all_navs as $n)
@@ -149,10 +134,10 @@ class AdminNavigationController extends AbstractAdminController
      */
     public function destroy(NavigationInterface $nav)
     {
-        \Event::fire(new NavigationWasDeleted($nav));
+       // \Event::fire(new NavigationWasDeleted($nav));
         $nav->delete();
 
-        return redirect()->route('laravel-navigation::index');
+        return redirect()->route('admin.navigation.index');
     }
 
 }
