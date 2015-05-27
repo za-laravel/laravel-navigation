@@ -1,11 +1,9 @@
 <div class="form-group">
     {!! Form::label('name', '', ["class"=>"col-sm-3 control-label"]) !!}
     <div class="col-sm-6">
-        {!! Form::text('name', '', ["class"=>"form-control", 'required' => 'required' ]) !!}
+        {!! Form::text('name', $nav->name, ["class"=>"form-control", 'required' => 'required' ]) !!}
     </div>
 </div>
-
-<hr/>
 
 <div class="form-group">
     {!! Form::label('link', '', ["class"=>"col-sm-3 control-label"]) !!}
