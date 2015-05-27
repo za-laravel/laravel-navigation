@@ -19,6 +19,9 @@ class LaravelNavigationServiceProvider extends ServiceProvider {
         // Views
         $this->loadViewsFrom(__DIR__ . '/../../views', 'laravel-navigation');
 
+        // Binding
+        $this->app->bind('ZaLaravel\LaravelNavigation\Models\Interfaces\NavigationInterface', Config::get('nav.model'));
+
         // Migrations
         $this->publishes([
             __DIR__.'/../../database/migrations/' => base_path('/database/migrations')
