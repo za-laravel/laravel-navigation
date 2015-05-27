@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use ZaLaravel\LaravelNavigation\Models\Navigation;
 
 class NavigationTableSeeder extends Seeder
 {
