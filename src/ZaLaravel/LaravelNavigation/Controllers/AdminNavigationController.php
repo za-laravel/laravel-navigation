@@ -85,8 +85,10 @@ class AdminNavigationController extends AbstractAdminController
      */
     public function edit(NavigationInterface $nav)
     {
-        $all_navs = $nav::where('id', '==', $nav->id)->get();
-        $navs = [0 => 'Choose parent'];
+
+        $all_navs = $nav::where('id', '!=', $nav->id)->get();
+
+        $navs = [0 => '-- Parent'];
         foreach ($all_navs as $n)
         {
             $navs[$n->id] = $n->name;
@@ -128,7 +130,6 @@ class AdminNavigationController extends AbstractAdminController
      */
     public function destroy(NavigationInterface $nav)
     {
-       // \Event::fire(new NavigationWasDeleted($nav));
         $nav->delete();
 
         return redirect()->route('admin.navigation.index');
