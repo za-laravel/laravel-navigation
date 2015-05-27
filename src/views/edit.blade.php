@@ -22,13 +22,13 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            @include('errorBasic')
+                            @include('laravel-navigation::errorBasic')
 
                             {!! Form::model($nav,['route'=>['admin.navigation.update', $nav->id],
                                 'method' => 'PATCH',
                                 'class'=>'form-horizontal', 'role'=>'form',
                                 'id' => 'form-edit', 'data-id'=> $nav->id]) !!}
-                                @include('_form')
+                                @include('laravel-navigation::_form')
                             {!! Form::close() !!}
                         </div>
                         <!-- /.col-lg-6 (nested) -->

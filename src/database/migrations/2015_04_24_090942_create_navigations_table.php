@@ -15,6 +15,7 @@ class CreateNavigationsTable extends Migration {
 		Schema::create('navigations', function(Blueprint $table)
 		{
 			$table->increments('id');
+            $table->string('name');
             $table->string('link');
             $table->integer('parent_id')->nullable()->unsigned()->index();
             $table->foreign('parent_id')->references('id')->on('navigations')->onDelete('cascade');
