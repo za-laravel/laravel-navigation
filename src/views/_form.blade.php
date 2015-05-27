@@ -5,8 +5,6 @@
     </div>
 </div>
 
-<hr/>
-
 <div class="form-group">
     {!! Form::label('link', '', ["class"=>"col-sm-3 control-label"]) !!}
     <div class="col-sm-6">
