@@ -62,7 +62,7 @@ class AdminNavigationController extends AbstractAdminController
             $nav->parent()->associate($parent);
         }
         $nav->save();
-        
+
         return redirect()->route('admin.navigation.index');
     }
 
