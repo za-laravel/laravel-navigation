@@ -3,7 +3,6 @@
 namespace ZaLaravel\LaravelNavigation;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Config;
 
 /**
  * Class LaravelNavigationServiceProvider

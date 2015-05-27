@@ -2,9 +2,6 @@
 
 namespace ZaLaravel\LaravelNavigation\Controllers;
 
-use ZaLaravel\LaravelNavigation\Events\NavigationWasCreated;
-use ZaLaravel\LaravelNavigation\Events\NavigationWasDeleted;
-use ZaLaravel\LaravelNavigation\Events\NavigationWasEdited;
 use ZaLaravel\LaravelAdmin\Controllers\AbstractAdminController;
 use ZaLaravel\LaravelNavigation\Models\Interfaces\NavigationInterface;
 use ZaLaravel\LaravelNavigation\Requests\NavigationRequest;
@@ -36,12 +33,13 @@ class AdminNavigationController extends AbstractAdminController
     public function create(NavigationInterface $nav)
     {
         $getNav = $nav::all();
-        $navs = [0 => '-- Choose parent'];
+        $navs = [0 => 'Choose parent'];
         foreach ($getNav as $n)
         {
             $navs[$n->id] = $n->name;
         }
-        return view('laravel-navigation::create', ['action' => 'create', 'nav' => $nav, 'navs' => $navs]);
+        return view('laravel-navigation::create',
+            ['action' => 'create', 'nav' => $nav, 'navs' => $navs]);
     }
 
     /**
@@ -88,7 +86,7 @@ class AdminNavigationController extends AbstractAdminController
 
         $all_navs = $nav::where('id', '!=', $nav->id)->get();
 
-        $navs = [0 => '-- Parent'];
+        $navs = [0 => 'Choose parent'];
         foreach ($all_navs as $n)
         {
             $navs[$n->id] = $n->name;
