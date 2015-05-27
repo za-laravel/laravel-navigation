@@ -6,7 +6,7 @@ use App\Events\NavigationWasCreated;
 use App\Events\NavigationWasDeleted;
 use App\Events\NavigationWasEdited;
 use ZaLaravel\LaravelAdmin\Controllers\AbstractAdminController;
-use ZaLaravel\LaravelNavigation\Models\Navigation;
+use ZaLaravel\LaravelNavigation\Models\Interfaces\NavigationInterface;
 use ZaLaravel\LaravelNavigation\Requests\NavigationRequest;
 
 /**
@@ -15,32 +15,33 @@ use ZaLaravel\LaravelNavigation\Requests\NavigationRequest;
  */
 class AdminNavigationController extends AbstractAdminController
 {
-
     /**
-     * Display a listing of the resource.
+     * Index
      *
-     * @return Response
+     * @param NavigationInterface $navs
+     * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(NavigationInterface $navs)
     {
-        $navs = Navigation::orderBy('id', 'desc')->paginate(10);
-
+        $navs = $navs::orderBy('id', 'desc')->paginate(10);
         return view('laravel-navigation::index', ['navs' => $navs]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @param NavigationInterface $nav
+     * @return \Illuminate\View\View
      */
-    public function create(Navigation $nav)
+    public function create(NavigationInterface $nav)
     {
-        $all_navs = Navigation::all();
+        $all_navs = $nav::all();
         $navs = [0 => '-- Parent'];
-        foreach ($all_navs as $n) {
+
+        foreach ($all_navs as $n)
+        {
             $navs[$n->id] = $n->name;
         }
-
         return view('laravel-navigation::create',
             ['action' => 'create', 'nav' => $nav, 'navs' => $navs]);
     }
@@ -48,9 +49,12 @@ class AdminNavigationController extends AbstractAdminController
     /**
      * Store a newly created resource in storage.
      *
-     * @return Response
+     * @param NavigationInterface $nav
+     * @param NavigationRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Navigation $nav, NavigationRequest $request)
+
+    public function store(NavigationInterface $nav, NavigationRequest $request)
     {
         $data = $request->all();
         $data = [
@@ -61,7 +65,7 @@ class AdminNavigationController extends AbstractAdminController
         $nav->fill($data);
 
         if ($data['parent_id']) {
-            $parent = Navigation::find($data['parent_id']);
+            $parent = $nav::find($data['parent_id']);
             $nav->parent()->associate($parent);
         }
 
@@ -71,7 +75,7 @@ class AdminNavigationController extends AbstractAdminController
 
         \Event::fire(new NavigationWasCreated($nav));
 
-        return redirect()->route('admin.navigation.edit', ['id' => $nav->id]);
+        return redirect()->route('laravel-navigation::edit', ['id' => $nav->id]);
     }
 
     /**
@@ -88,29 +92,30 @@ class AdminNavigationController extends AbstractAdminController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
-     * @return Response
+     * @param NavigationInterface $nav
+     * @return \Illuminate\View\View
      */
-    public function edit(Navigation $nav)
+    public function edit(NavigationInterface $nav)
     {
-        $all_navs = Navigation::where('id', '!=', $nav->id)->get();
+        $all_navs = $nav::where('id', '!=', $nav->id)->get();
 
         $navs = [0 => '-- Parent'];
-        foreach ($all_navs as $n) {
+        foreach ($all_navs as $n)
+        {
             $navs[$n->id] = $n->name;
         }
-
-        return view('admin.navigation.edit',
+        return view('laravel-navigation::edit',
             ['action' => 'edit', 'nav' => $nav, 'navs' => $navs]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  int $id
-     * @return Response
+     * @param NavigationInterface $nav
+     * @param NavigationRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Navigation $nav, NavigationRequest $request)
+    public function update(NavigationInterface $nav, NavigationRequest $request)
     {
         $data = $request->all();
         $data = [
@@ -121,7 +126,7 @@ class AdminNavigationController extends AbstractAdminController
         $nav->fill($data);
 
         if ($data['parent_id']) {
-            $parent = Navigation::find($data['parent_id']);
+            $parent = $nav::find($data['parent_id']);
             $nav->parent()->associate($parent);
         } else {
             $nav->parent()->dissociate();
@@ -133,21 +138,21 @@ class AdminNavigationController extends AbstractAdminController
 
         \Event::fire(new NavigationWasEdited($nav));
 
-        return redirect()->route('admin.navigation.edit', ['id' => $nav->id]);
+        return redirect()->route('laravel-navigation::edit', ['id' => $nav->id]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
-     * @return Response
+     * @param NavigationInterface $nav
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Navigation $nav)
+    public function destroy(NavigationInterface $nav)
     {
         \Event::fire(new NavigationWasDeleted($nav));
         $nav->delete();
 
-        return redirect()->route('admin.navigation.index');
+        return redirect()->route('laravel-navigation::index');
     }
 
 }

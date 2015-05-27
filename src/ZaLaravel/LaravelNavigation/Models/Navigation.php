@@ -2,13 +2,14 @@
 
 namespace ZaLaravel\LaravelNavigation\Models;
 
+use ZaLaravel\LaravelNavigation\Models\Interfaces\NavigationInterface;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Navigation
  * @package ZaLaravel\LaravelNavigation\Models
  */
-class Navigation extends Model
+class Navigation extends Model implements NavigationInterface
 {
 
     protected $fillable = ['name', 'link', 'sort_order'];
