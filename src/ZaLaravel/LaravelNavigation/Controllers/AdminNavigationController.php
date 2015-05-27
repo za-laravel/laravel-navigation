@@ -43,7 +43,7 @@ class AdminNavigationController extends AbstractAdminController
             $navs[$n->id] = $n->name;
         }
         return view('laravel-navigation::create',
-            ['action' => 'create', 'nav' => $nav, 'navs' => $navs]);
+            ['action' => 'create', 'navs' => $navs]);
     }
 
     /**
