@@ -3,7 +3,7 @@
 namespace ZaLaravel\LaravelNavigation\Composers;
 
 use Illuminate\Contracts\View\View;
-use ZaLaravel\LaravelNavigation\Services\Navigation\NavigationService;
+use ZaLaravel\LaravelNavigation\Models\Navigation;
 
 /**
  * Class NavigationComposer
@@ -13,7 +13,7 @@ class NavigationComposer
 {
     public function compose(View $view)
     {
-        $navItems = NavigationService::menuArray();
+        $navItems = Navigation::all();
 
         $view->with('items', $navItems);
 
