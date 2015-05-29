@@ -2,7 +2,7 @@
 
 namespace ZaLaravel\LaravelNavigation\Controllers;
 
-use ZaLaravel\LaravelAdmin\Controllers\AbstractAdminController;
+use App\Http\Controllers\Controller;
 use ZaLaravel\LaravelNavigation\Models\Interfaces\NavigationInterface;
 use ZaLaravel\LaravelNavigation\Requests\NavigationRequest;
 
@@ -10,7 +10,7 @@ use ZaLaravel\LaravelNavigation\Requests\NavigationRequest;
  * Class AdminNavigationController
  * @package ZaLaravel\LaravelNavigation\Controllers
  */
-class AdminNavigationController extends AbstractAdminController
+class AdminNavigationController extends Controller
 {
     /**
      * Index

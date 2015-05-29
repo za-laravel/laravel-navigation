@@ -16,7 +16,7 @@ Simple navaigation for Laravel 5
          'Illuminate\Foundation\Providers\ArtisanServiceProvider',
          'Illuminate\Auth\AuthServiceProvider',
          ...
-         'ZaLaravel\LaravelAdmin\LaravelNavigationServiceProvider',
+         'ZaLaravel\LaravelNavigation\LaravelNavigationServiceProvider',
      
      ),
      ?>
