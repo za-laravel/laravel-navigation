@@ -1,5 +1,5 @@
-{{--@extends('laravel-admin::layout')--}} <!-- don`t dependency -->
-@extends('admin.adminLayout')
+@extends('laravel-admin::layout')
+
 @section('title')
     Навигация
 @stop
