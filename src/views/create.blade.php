@@ -1,4 +1,4 @@
-@extends('laravel-admin::layout')
+@extends('admin.adminLayout')
 
 @section('title')
     Создать пункт меню

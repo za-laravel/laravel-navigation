@@ -1,4 +1,4 @@
-@extends('laravel-admin::layout')
+@extends('admin.adminLayout')
 
 @section('title')
     Редактировать пункт меню
