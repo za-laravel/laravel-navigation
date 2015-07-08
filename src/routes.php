@@ -12,4 +12,7 @@
 */
 
 Route::model('navigation', 'ZaLaravel\LaravelNavigation\Models\Navigation');
-Route::resource('/admin/navigation', 'ZaLaravel\LaravelNavigation\Controllers\AdminNavigationController');
+Route::group(['middleware' => 'auth'], function()
+{
+    Route::resource('/admin/navigation', 'ZaLaravel\LaravelNavigation\Controllers\AdminNavigationController');
+});
